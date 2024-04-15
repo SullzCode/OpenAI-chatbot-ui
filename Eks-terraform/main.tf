@@ -83,7 +83,6 @@ resource "aws_eks_node_group" "example" {
   node_group_name = "Node-cloud"
   node_role_arn   = aws_iam_role.example1.arn
   subnet_ids      = data.aws_subnets.public.ids
-  region = "us-east-1"
 
   scaling_config {
     desired_size = 1
