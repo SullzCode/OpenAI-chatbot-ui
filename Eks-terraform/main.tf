@@ -31,7 +31,6 @@ data "aws_subnets" "public" {
     name   = "vpc-id"
     values = [data.aws_vpc.default.id]
   }
-  region = "us-east-1"
 }
 #cluster provision
 resource "aws_eks_cluster" "example" {
