@@ -28,10 +28,9 @@ data "aws_vpc" "default" {
 #get public subnets for cluster
 data "aws_subnets" "public" {
   filter {
-    name = "availability_zone"
-    values = ["us-east-1a", "us-east-1b"]  # Filter by desired AZs
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
   }
-}
 #cluster provision
 resource "aws_eks_cluster" "example" {
   name     = "EKS_CLOUD"
