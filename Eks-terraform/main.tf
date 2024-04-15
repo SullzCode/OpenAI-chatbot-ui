@@ -24,6 +24,7 @@ resource "aws_iam_role_policy_attachment" "example-AmazonEKSClusterPolicy" {
 #get vpc data
 data "aws_vpc" "default" {
   default = true
+  region = "us-east-1"
 }
 #get public subnets for cluster
 data "aws_subnets" "public" {
@@ -31,10 +32,13 @@ data "aws_subnets" "public" {
     name   = "vpc-id"
     values = [data.aws_vpc.default.id]
   }
+  region = "us-east-1"
+}
 #cluster provision
 resource "aws_eks_cluster" "example" {
   name     = "EKS_CLOUD"
   role_arn = aws_iam_role.example.arn
+  region = "us-east-1"
 
   vpc_config {
     subnet_ids = data.aws_subnets.public.ids
@@ -82,6 +86,7 @@ resource "aws_eks_node_group" "example" {
   node_group_name = "Node-cloud"
   node_role_arn   = aws_iam_role.example1.arn
   subnet_ids      = data.aws_subnets.public.ids
+  region = "us-east-1"
 
   scaling_config {
     desired_size = 1
