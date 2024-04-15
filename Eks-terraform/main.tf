@@ -24,7 +24,6 @@ resource "aws_iam_role_policy_attachment" "example-AmazonEKSClusterPolicy" {
 #get vpc data
 data "aws_vpc" "default" {
   default = true
-  region = "us-east-1"
 }
 #get public subnets for cluster
 data "aws_subnets" "public" {
